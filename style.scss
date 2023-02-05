@@ -1,0 +1,348 @@
+@import 'default';
+
+$black: #000;
+$white: #fff;
+$mainBlack: #202020;
+$orange: #FF3D00;
+$pink: #EF5DA8;
+$blue: #0085FF;
+$gray: #939393;
+$lightgray: #e3e3e3;
+
+@mixin font($size) {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: $size;
+}
+
+@mixin button($color) {
+    border: 1px solid $color;
+    color: $color;
+    @include font(900);
+    padding: 10px 0;
+    background-color: $white;
+    font-size: 14px;
+    transition: 0.5s;
+    width: 100%;
+    border-radius: 5px;
+}
+
+@mixin activeButton($color) {
+    @include button($color);
+    background-color: $color;
+    color: $white;
+    cursor: pointer;
+}
+
+@mixin cover($height) {
+    position: relative;
+    width: 100%;
+    padding-top: $height;
+    img, .content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+%container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn {
+    &.orange {
+        @include button($orange);
+        &:hover {
+            @include activeButton($orange);
+        }    
+    }
+    &.blue {
+        @include button($blue);
+        &:hover {
+         @include activeButton($blue);
+        }
+    }
+    &.white {
+        @include button($white);
+        background-color: $blue;
+        &:hover {
+            @include activeButton($white);
+            color: $blue;
+        }
+    }
+}
+
+
+
+p {
+    @include font(400);
+}
+h1, h2, h3 {
+    @include font(900);
+}
+h4 {
+    @include font(700);
+}
+
+section {
+    margin-bottom: 80px;
+}
+.wrapper {
+    width: 1100px;
+    margin: 0 auto;
+    padding: 0 10px;
+    background-color: #F7F7F7;
+}
+
+header {
+    @extend %container;
+    padding: 38px 0;
+    .burger-menu {
+        padding: 5px;
+        border-radius: 5px;
+        transition: 0.5s;
+        &:hover {
+            background-color: #c82380;
+        }
+    }    
+    .line {
+        width: 18px;
+        height: 2px;
+        background-color: $mainBlack;
+        margin-bottom: 5px;  
+        &:last-child {
+            margin-bottom: 0;
+        }          
+    }
+    .active {
+        color: $pink;
+        /*fill: $orange;*/
+        &:hover {
+            color: $orange;
+        }
+    }
+    nav {
+        a {            
+            margin-left: 20px;             
+        }       
+    } 
+    path {
+        transition: 0.5s;
+        fill: $mainBlack;
+        &:hover {
+            fill: $orange;
+        }
+    }   
+}
+
+.main {
+    @extend %container;
+    .rectangle {        
+        &.cover {
+           @include cover(35%);
+           width: 49%;
+           background-color: $blue; 
+           border-radius: 8px;
+           img {
+            border-radius: 8px;
+           }
+        }
+        h2 {
+            font-size: 20px;            
+            color: $white;
+            padding: 38px 55px;
+        }       
+    }        
+}
+
+.cards {
+    @extend %container;
+    .card {
+        width: 18%; 
+        background: white;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
+        border-radius: 8px;
+        .cover {
+            @include cover(100%);
+            img {
+                border-radius: 8px 8px 0 0;
+            }
+        }
+        .card-content {
+            padding: 10px;
+        }
+        .title {
+            font-size: 16px;
+            line-height: 20px;
+            color: $mainBlack;
+            margin: 0 0 14px;
+        }  
+        .desc {
+            font-size: 12px;
+            line-height: 15px;
+            color: $black;
+            margin: 0 0 8px;
+        }  
+        .duration {
+            font-size: 10px;
+            line-height: 12px;
+            color: $mainBlack;
+            margin: 0 0 7px;
+        }        
+    }    
+}
+
+.form {
+    padding-bottom: 80px;
+    margin-bottom: 0;
+}
+
+form {
+    width: calc(312/1100 * 100%);   
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid #E3E3E3;
+    border-radius: 8px;
+    padding: 15px 20px 35px;
+    /*@extend %container;
+    flex-direction: column;*/
+
+    input[type=text], input[type=tel], input[type=email], input[type=password], select {    
+        width: 93%;
+        border: 1px solid $gray;
+        border-radius: 6px;
+        margin-bottom: 13px;
+        color: $gray;
+        font-size: 10px;
+        line-height: 12px;
+        padding: 7px 10px;
+        &:hover, &:checked, &:visited, &:active {
+            border: 1px solid $blue;
+            color: $blue;
+        }    
+    }    
+    select {
+        width: 100%;
+        margin-bottom: 26px;
+        cursor: pointer;
+    }    
+    option {
+        color: $mainBlack;
+        font-size: 12px;
+        transition: 0.4s;
+    }
+    h2 {
+        font-size: 20px;
+        text-align: center;
+        margin-bottom: 26px;
+    }    
+}
+
+.profile {
+    @extend %container;
+    background-color: $blue;
+    align-items: stretch;
+    color: white;
+    padding: 33px;
+    border-radius: 8px;
+    .container {
+        width: 45%;
+        @extend %container;
+        align-items: stretch;
+        &:last-child {
+            flex-direction: column;
+        }
+    }
+    .cover {
+        @include cover(48%);
+        width: 48%;
+        img {
+            border-radius: 12px;
+        }
+    }
+    h3 {
+        margin-bottom: 3px;
+    }
+    p {
+        font-size: 12px;
+    }
+    .info {
+        @extend %container;
+        flex-direction: column;
+        &-text {
+            .name {
+                margin-bottom: 20px;
+            }
+        }
+        a {
+            width: 100%;
+        }
+    }
+    
+}
+
+footer {
+    @extend %container;
+    width: 1100px;
+    margin: 0 auto;
+    background-color: $mainBlack;
+   padding: 37px 10px 42px;
+   h3, p {
+    color: $white;
+   }
+   h3 {
+    font-size: 16px;
+   }
+   p {
+    font-size: 12px;
+   }
+}
+.projects { 
+    padding-bottom: 80px;
+    margin-bottom: 0;
+    h2 {
+        font-size: 20px;
+        margin-bottom: 25px;
+    }  
+    .container {       
+        @extend %container;
+        .project-info {
+            width: calc(109/1100 * 100%);
+            @extend %container;
+            flex-direction: column;
+            h4 {
+                font-size: 12px;
+                margin: 7px 0;
+            }
+            p {
+                font-size: 10px;
+                text-align: center;
+                padding: 0 6px;
+            }
+        }
+    }
+}
+.authorization, .registration {
+    margin-bottom: 0;
+    padding-bottom: 80px;
+    form {
+        width: calc(450/1100*100%);
+        padding: 15px 20px 11px;
+        @extend %container;
+        flex-direction: column;
+        input[type=email], input[type=password], input[type=text] {
+            width: 95%;            
+        }
+        input[type=button] {
+            margin-bottom: 46px;
+        }
+        p {
+            font-size: 12px;
+            margin-bottom: 13px;
+        }
+    }    
+}
